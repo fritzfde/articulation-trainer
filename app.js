@@ -83,7 +83,7 @@ function route(){
 }
 
 /* ---------------- TODAY ---------------- */
-const STEP_NAMES = [["Vocal warm-up","3 quick exercises · 90s"],["Learn 2 upgrades","Say this, not that"],["Scenario quiz","3 real-life situations"],["60-second Arena","Impromptu speaking drill"],["Today’s mission","Use it in real life"]];
+const STEP_NAMES = [["Vocal warm-up","3 quick exercises · 90s"],["Learn 2 upgrades","Say this, not that"],["Scenario quiz","3 real-life situations"],["60-second Arena","Impromptu speaking drill"],["Today’s mission","Use it in the real world"]];
 function wk(){
   if (!S.wk || S.wk.date !== today()) S.wk = { date: today(), done:[false,false,false,false,false] };
   return S.wk;
@@ -104,7 +104,7 @@ function renderToday(){
     <div class="hero">
       <div class="eyebrow">${new Date().toLocaleDateString("en-GB",{weekday:"long",day:"numeric",month:"long"})}</div>
       <h1 style="margin-top:6px">${greet}, Alex.</h1>
-      <p class="muted">Five minutes to stop losing your best ideas between your brain and your mouth.</p>
+      <p class="muted">Five minutes a day to speak like a man whose time is valuable — calm, clear, never needy.</p>
     </div>
     <div class="grid2">
       <div class="card streak-card">
@@ -158,7 +158,7 @@ function workoutStep(){
   if (f.step === 4) {
     return sheetHTML(`<div class="eyebrow">Step 5 of 5 · Mission</div><h2 style="margin:8px 0 14px">Take it into the real world</h2>
       <div class="card mission"><p class="big">${esc(p.mission)}</p></div>
-      <p class="muted" style="margin:14px 0 20px">Skills stick when you use them within 24 hours. Commit to one attempt today — perfect is not required.</p>
+      <p class="muted" style="margin:14px 0 20px">Skills stick when you use them within 24 hours. One deliberate attempt today — calm, unhurried, no need to be perfect.</p>
       <button class="btn btn-primary btn-block" data-act="mission-accept">I’m in — finish workout</button>`);
   }
   // finished
@@ -169,7 +169,7 @@ function workoutStep(){
   sheetHTML(`<div style="text-align:center;padding-top:30px">
     <div class="confetti">🎉</div>
     <h1 style="margin-top:8px">Workout complete</h1>
-    <p class="muted" style="margin-top:8px">You showed up. That’s the whole trick.</p>
+    <p class="muted" style="margin-top:8px">Five minutes, invested deliberately. That’s how high-value habits are built.</p>
     <div class="stats" style="margin:26px 0">
       <div class="stat"><b>${st}</b><span>day streak</span></div>
       <div class="stat"><b>+${f.xp}</b><span>XP earned</span></div>
@@ -213,7 +213,7 @@ function runFlash(tricks, onDone){
       <div class="card flash" id="flash">
         <div class="lbl not">Instead of</div><p class="say-t" style="color:var(--muted)">${esc(t.not)}</p>
         ${revealed ? `<div class="lbl say" style="margin-top:18px">Try</div>${t.say.map(s=>`<p class="say-t">${esc(s)}</p>`).join("")}
-          <div class="lesson" style="margin-top:18px"><div class="lbl">Why it works</div><p style="margin-top:4px">${esc(t.why)}</p><p class="small" style="margin-top:8px"><b>Use it:</b> ${esc(t.when)}</p></div>` : `<p class="hint">Think: what would you say instead? Tap to reveal.</p>`}
+          <div class="lesson" style="margin-top:18px"><div class="lbl">Why it works</div><p style="margin-top:4px">${esc(t.why)}</p><p class="small" style="margin-top:8px"><b>Use it:</b> ${esc(t.when)}</p></div>` : `<p class="hint">Think: what would a calm, high-value man say instead? Tap to reveal.</p>`}
       </div>
       <div class="stack" style="margin-top:16px">${revealed
         ? `<div class="grid2"><button class="btn btn-ghost" data-act="fav" data-id="${t.id}">${S.favs.includes(t.id)?"★ Saved to Vault":"☆ Save to Vault"}</button><button class="btn btn-primary" id="fnext">${i+1<tricks.length?"Next →":"Continue →"}</button></div>`
@@ -263,7 +263,7 @@ function runQuiz(items, onDone, title, inFlow){
     const pct = Math.round(score/items.length*100);
     sheetHTML(`<div style="text-align:center;padding-top:24px"><div class="eyebrow">${esc(title)}</div>
       <div class="result-big">${score}/${items.length}</div>
-      <p class="muted">${pct===100?"Flawless. You’re ready to use these today.":pct>=60?"Solid. Review the takeaways and they’ll stick.":"Every miss is a lesson you won’t forget. Try again tomorrow."}</p>
+      <p class="muted">${pct===100?"Flawless. Calm, grounded, and ready to use these today.":pct>=60?"Solid. Review the takeaways — that’s where the positioning sticks.":"Every miss is a reflex you’ve now spotted. Come back tomorrow."}</p>
       <p class="small muted" style="margin-top:6px">+${score*10} XP</p></div>
       <div class="stack" style="margin-top:24px"><button class="btn btn-primary btn-block" id="qdone">${inFlow?"Continue →":"Done"}</button></div>`);
     $("#qdone").onclick = () => onDone(score);
@@ -294,7 +294,7 @@ function quizStats(cat){
 }
 function renderTricks(){
   $("#app").innerHTML = `<div class="stack fade">
-    <div class="hero"><div class="eyebrow">Say this, not that</div><h1 style="margin-top:6px">The trick library</h1><p class="muted">${TRICKS.length} upgrades · ${SCEN.length} scenario quizzes. Tap “Why it works” to understand the psychology — that’s what makes it stick.</p></div>
+    <div class="hero"><div class="eyebrow">Say this, not that</div><h1 style="margin-top:6px">The trick library</h1><p class="muted">${TRICKS.length} upgrades · ${SCEN.length} scenario quizzes. Every line is built to position you as calm, grounded and high-value — never needy, never try-hard. Tap “Why it works” for the psychology.</p></div>
     <div class="section-h" style="margin-top:8px"><h2>Practice scenarios</h2></div>
     <div class="quiz-cats">
       <button class="qcat feature" data-act="quiz" data-cat="all"><span class="ic">✺</span><div><b>Mixed challenge</b><span>10 random scenarios${quizStats("all").pct!==null?` · ${quizStats("all").pct}% accuracy`:""}</span></div></button>
@@ -302,7 +302,7 @@ function renderTricks(){
     </div>
     <div class="section-h"><h2>Upgrades</h2><span class="small muted" id="tcount"></span></div>
     <div class="chips" id="chips"><button class="chip" data-f="all">All</button>${Object.entries(CATS).map(([k,c])=>`<button class="chip" data-f="${k}">${c.short}</button>`).join("")}</div>
-    <input class="search" id="tsearch" type="search" placeholder="Search phrases, e.g. “sorry”, “thank”, “name”…" value="${esc(tSearch)}">
+    <input class="search" id="tsearch" type="search" placeholder="Search, e.g. “sorry”, “thank”, “schedule”, “name”…" value="${esc(tSearch)}">
     <div class="grid2" id="tlist"></div>
   </div>`;
   $("#chips").onclick = e => { const b = e.target.closest(".chip"); if (!b) return; tFilter = b.dataset.f; drawTricks(); };
@@ -335,7 +335,7 @@ function renderSpeak(){
   const fw = FW.find(f=>f.id===arenaCfg.fw);
   const sessions = S.speak.length;
   $("#app").innerHTML = `<div class="stack fade">
-    <div class="hero"><div class="eyebrow">Articulation Arena</div><h1 style="margin-top:6px">Think on your feet.</h1><p class="muted">Get a topic, take 10 seconds to plan with a framework, then speak out loud until the timer ends. ${sessions?`You’ve done ${sessions} round${sessions===1?"":"s"}.`:""}</p></div>
+    <div class="hero"><div class="eyebrow">Articulation Arena</div><h1 style="margin-top:6px">Speak like your time matters.</h1><p class="muted">Get a topic, take 10 seconds to plan, then speak out loud — unhurried, structured, no fillers, no over-explaining. ${sessions?`You’ve done ${sessions} round${sessions===1?"":"s"}.`:""}</p></div>
     <div class="grid2">
       <div class="card">
         <div class="toggle-row"><div class="eyebrow">Your topic</div><button class="btn btn-ghost btn-sm" data-act="new-topic">↻ New topic</button></div>
@@ -355,9 +355,9 @@ function renderSpeak(){
     </div>
     <div class="section-h"><h2>Arena rules</h2></div>
     <div class="card"><ol class="steps" style="margin:0">
-      <li><span class="dot">1</span><div><div class="t">First sentence = your point</div><div class="m">No warm-up. Answer first, explain second.</div></div></li>
-      <li><span class="dot">2</span><div><div class="t">Pause instead of “um”</div><div class="m">Silence sounds confident. Filler sounds nervous.</div></div></li>
-      <li><span class="dot">3</span><div><div class="t">Land the plane</div><div class="m">Finish with “So my point is…” and a downward tone.</div></div></li>
+      <li><span class="dot">1</span><div><div class="t">First sentence = your point</div><div class="m">No warm-up, no permission-seeking. Answer first.</div></div></li>
+      <li><span class="dot">2</span><div><div class="t">Pause instead of “um”</div><div class="m">Own the silence. Filler is nervous energy leaking out.</div></div></li>
+      <li><span class="dot">3</span><div><div class="t">Land the plane</div><div class="m">“Bottom line: …” with a downward tone — then stop talking.</div></div></li>
     </ol></div>
   </div>`;
   $("#durseg").onclick = e => { const b=e.target.closest("button"); if(!b) return; arenaCfg.secs=+b.dataset.s; renderSpeak(); };
@@ -420,10 +420,10 @@ function runArena(o){
     const fil = countFillers(text), wpm = Math.round(words / spoken * 60);
     const hasTr = mic && words > 0;
     const top = Object.entries(fil.by).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k,v])=>`“${k}” ×${v}`).join(", ");
-    const checks = ["My first sentence stated my point clearly","I followed the framework structure","I paused instead of saying “um” or “like”","I ended with a clear closing line (landed the plane)","My voice went down at the end of statements"];
+    const checks = ["My first sentence stated my point clearly","I followed the framework structure","I paused instead of saying “um” or “like”","I stayed unhurried — no rushing, no over-explaining","I ended with a clear closing line (landed the plane)","My voice went down at the end of statements"];
     sheetHTML(`<div class="eyebrow">${head} · Review</div><h2 style="margin:8px 0 16px">How did that feel?</h2>
       ${hasTr ? `<div class="stats"><div class="stat"><b>${words}</b><span>words</span></div><div class="stat"><b>${wpm}</b><span>words/min</span></div><div class="stat"><b style="color:${fil.total>3?"var(--red)":"var(--green)"}">${fil.total}</b><span>fillers</span></div></div>
-        <p class="small muted" style="margin:10px 0 4px">${wpm<110?"A bit slow — fine for emphasis, but keep energy up.":wpm<=165?"Great pace — the 120–160 wpm range sounds clear and confident.":"Fast. Slow down around your key point and add 2-second pauses."}${top?` Most common: ${top}.`:""}</p>
+        <p class="small muted" style="margin:10px 0 4px">${wpm<110?"A bit slow — fine for emphasis, but keep energy up.":wpm<=155?"Good, grounded pace — clear and unhurried.":"Rushing. Slow down — an unhurried pace is the sound of someone who expects to be heard."}${top?` Most common: ${top}.`:""}</p>
         <div class="transcript" style="margin-top:8px">${markFillers(text)}</div>` : `<p class="note">${mic?"No speech was captured, so here’s the self-check only.":"Self-check: be honest — this is where improvement happens."}</p>`}
       <div class="card" style="margin-top:16px" id="checks">${checks.map((c,k)=>`<label class="check"><input type="checkbox" data-k="${k}"><span>${esc(c)}</span></label>`).join("")}</div>
       <div class="stack" style="margin-top:18px"><button class="btn btn-primary btn-block" id="adone">${o.inFlow?"Save & continue →":"Save round (+20 XP)"}</button>${o.inFlow?"":`<button class="btn btn-ghost btn-block" id="again">Try the same topic again</button>`}</div>`);
@@ -450,25 +450,25 @@ let vTab = "saved";
 function renderVault(){
   const tabs = [["saved","Saved"],["notes","Cheat sheet"],["drills","Warm-ups & drills"],["progress","Progress"]];
   $("#app").innerHTML = `<div class="stack fade">
-    <div class="hero"><div class="eyebrow">Your vault</div><h1 style="margin-top:6px">Phrases, drills, progress.</h1><p class="muted">Everything is stored privately on this device.</p></div>
+    <div class="hero"><div class="eyebrow">Your vault</div><h1 style="margin-top:6px">Your lines. Your drills. Your progress.</h1><p class="muted">Everything is stored privately on this device.</p></div>
     <div class="chips" id="vtabs">${tabs.map(([k,n])=>`<button class="chip ${vTab===k?"on":""}" data-v="${k}">${n}</button>`).join("")}</div>
     <div id="vbody"></div></div>`;
   $("#vtabs").onclick = e => { const b=e.target.closest(".chip"); if(!b) return; vTab=b.dataset.v; renderVault(); };
   const vb = $("#vbody");
   if (vTab === "saved") {
     const favs = TRICKS.filter(t=>S.favs.includes(t.id));
-    vb.innerHTML = favs.length ? `<div class="grid2">${favs.map(trickCard).join("")}</div>` : `<div class="card empty">Tap ☆ on any trick to save it here as your personal cheat sheet.<div style="margin-top:14px"><a class="btn btn-primary" href="#tricks">Browse tricks</a></div></div>`;
+    vb.innerHTML = favs.length ? `<div class="grid2">${favs.map(trickCard).join("")}</div>` : `<div class="card empty">Tap ☆ on any line to save it here — your personal playbook.<div style="margin-top:14px"><a class="btn btn-primary" href="#tricks">Browse tricks</a></div></div>`;
   }
   if (vTab === "notes") {
     vb.innerHTML = `<div class="card"><div class="eyebrow" style="margin-bottom:8px">Add your own line</div>
-      <textarea class="inp" id="ninp" placeholder="e.g. My hook: “I help teams ship without the chaos.”"></textarea>
+      <textarea class="inp" id="ninp" placeholder="e.g. My one-line answer: “I run large-scale projects. Lately the interesting part is AI.”"></textarea>
       <button class="btn btn-primary btn-block" style="margin-top:10px" data-act="add-note">Save to cheat sheet</button></div>
-      <div class="card" style="margin-top:16px">${S.notes.length ? S.notes.slice().reverse().map(n=>`<div class="note-item"><p>${esc(n.t)}</p><button class="icon-btn" data-act="del-note" data-id="${n.id}" aria-label="Delete">✕</button></div>`).join("") : `<div class="empty">Your personal phrases, openers and hooks will live here.</div>`}</div>`;
+      <div class="card" style="margin-top:16px">${S.notes.length ? S.notes.slice().reverse().map(n=>`<div class="note-item"><p>${esc(n.t)}</p><button class="icon-btn" data-act="del-note" data-id="${n.id}" aria-label="Delete">✕</button></div>`).join("") : `<div class="empty">Your personal lines, openers and boundaries will live here.</div>`}</div>`;
   }
   if (vTab === "drills") {
     const D = [["warm","◎","3-minute vocal warm-up","Breath, resonance, articulation, pitch"],["twister","✷","Tongue twister sprint","Crisp consonants · slow → fast"],["pause","❙❙","Strategic pause drill","Hold 2 seconds at every marker"],["inflect","↘","Downward inflection","Statements that sound certain"],["pace","⏱","Pacing check","Read aloud, measure your words/min"]];
     vb.innerHTML = `<div class="drill-list">${D.map(d=>`<button class="card drill" data-act="drill" data-d="${d[0]}"><span class="ic">${d[1]}</span><span><b style="display:block">${d[2]}</b><span class="small muted">${d[3]}</span></span></button>`).join("")}</div>
-      <div class="card" style="margin-top:16px"><div class="eyebrow">Why warm up?</div><p style="margin-top:6px">Your voice is muscles. Three minutes before a call or meeting loosens your jaw, wakes up your diaphragm and makes your first sentence sound like your fifth.</p></div>`;
+      <div class="card" style="margin-top:16px"><div class="eyebrow">Why warm up?</div><p style="margin-top:6px">Calm vocal weight is physical. Three minutes before a call or meeting loosens your jaw, drops your breath into your chest and makes your first sentence sound as grounded as your fifth.</p></div>`;
   }
   if (vTab === "progress") {
     const total = Object.keys(S.days).length, lv = level();
@@ -528,7 +528,7 @@ function openDrill(d){
   }
   if (d === "pace") {
     const words = window.PACING_TEXT.split(/\s+/).length; let t0 = 0;
-    sheetHTML(`<div class="eyebrow">Pacing check</div><p class="small muted" style="margin:6px 0 14px">Tap start, read the passage aloud at your natural presenting pace, tap stop. Target: 130–160 words per minute.</p>
+    sheetHTML(`<div class="eyebrow">Pacing check</div><p class="small muted" style="margin:6px 0 14px">Tap start, read the passage aloud at your natural presenting pace, tap stop. Target: 120–150 words per minute — unhurried, never rushed.</p>
       <div class="card"><p style="font-family:var(--serif);font-size:20px;line-height:1.55">${esc(window.PACING_TEXT)}</p></div>
       <div id="pres" style="margin-top:14px"></div>
       <button class="btn btn-primary btn-block" style="margin-top:14px" id="pbtn">▶ Start reading</button>`);
@@ -536,7 +536,7 @@ function openDrill(d){
     b.onclick = () => {
       if (!t0) { t0 = Date.now(); b.textContent = "■ Stop"; b.className = "btn btn-dark btn-block"; return; }
       const s = (Date.now()-t0)/1000, wpm = Math.round(words/s*60); t0 = 0;
-      const verdict = wpm < 120 ? "Slow and deliberate. Good for gravitas — make sure energy stays up." : wpm <= 165 ? "Right in the sweet spot. Clear, confident, easy to follow." : "Too fast. Add a 2-second pause after each key sentence and try again.";
+      const verdict = wpm < 120 ? "Slow and deliberate. Good for gravitas — make sure energy stays up." : wpm <= 155 ? "Right in the sweet spot. Clear, confident, easy to follow." : "Rushing. Add a 2-second pause after each key sentence — slow signals status.";
       $("#pres").innerHTML = `<div class="stats"><div class="stat"><b>${wpm}</b><span>words/min</span></div><div class="stat"><b>${s.toFixed(1)}s</b><span>time</span></div><div class="stat"><b>${words}</b><span>words</span></div></div><p class="note" style="margin-top:10px">${verdict}</p>`;
       b.textContent = "↻ Try again"; b.className = "btn btn-ghost btn-block";
       addXP(5, "Pacing measured");
